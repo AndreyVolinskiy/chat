@@ -17,7 +17,16 @@ public class ServiceImpl implements Service {
             return false;
         } else {
             password = registeredUser.getPassword();
-            return password.equals(chekingUser.getPassword());
+            try {
+                return password.equals(chekingUser.getPassword());
+            } catch (NullPointerException e) {
+                return false;
+            }
         }
+    }
+
+    @Override
+    public void registration(User user) {
+        DaoFactory.getDaoMethods().createNewUser(user);
     }
 }

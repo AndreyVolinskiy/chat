@@ -9,4 +9,5 @@ public interface Service {
 
     boolean checkRegistration(User user);
 
+    void registration(User user);
 }

@@ -13,9 +13,9 @@ public class Main {
 
     public static void main(String[] args) {
         User general = new User();
-        general.setName("general1");
+        general.setName("general");
         general.setLogin("general");
-        general.setPassword("general1");
+        general.setPassword("general");
 
         System.out.println(ServiceFactory.getServiceMethods().checkRegistration(general));
 

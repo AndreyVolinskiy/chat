@@ -10,7 +10,7 @@
 
 <AnchorPane fx:controller="controller.WelcomeController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="txtWelcome" layoutX="112.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! Please, sign in or register.">
+      <Text fx:id="txtWelcome" focusTraversable="true" layoutX="112.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! Please, sign in or register.">
          <font>
             <Font size="24.0" />
          </font>

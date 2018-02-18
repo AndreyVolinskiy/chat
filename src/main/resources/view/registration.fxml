@@ -9,7 +9,7 @@
 
 <AnchorPane fx:controller="controller.RegistrationController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="txtTop" layoutX="26.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please, enter your name, login and password below.">
+      <Text fx:id="txtTop" focusTraversable="true" layoutX="26.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please, enter your name, login and password below.">
          <font>
             <Font size="24.0" />
          </font>

@@ -15,6 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import model.User;
+import service.factory.ServiceFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,17 +43,7 @@ public class RegistrationController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        String name = txtName.getText();
-        String login = txtLogin.getText();
-        String password = txtPassword.getText();
-        String passwordRe = txtPasswordRe.getText();
-        if (password.equals(passwordRe)) {
-            User user = new User(name, login, password);
-        } else {
-            txtTop.setText("Passwords don't match, re-enter");
-            txtPassword.clear();
-            txtPasswordRe.clear();
-        }
+        btnRegister.setOnAction(event -> register());
 
         btnBack.setOnMouseClicked(event -> {
             try {
@@ -61,6 +52,22 @@ public class RegistrationController implements Initializable {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void register() {
+        String name = txtName.getText();
+        String login = txtLogin.getText();
+        String password = txtPassword.getText();
+        String passwordRe = txtPasswordRe.getText();
+        User user = new User(name, login, password);
+        if (password.equals(passwordRe)) {
+            ServiceFactory.getServiceMethods().registration(user);
+            txtTop.setText("Registration successful!");
+        } else {
+            txtTop.setText("Passwords don't match, re-enter");
+            txtPassword.clear();
+            txtPasswordRe.clear();
+        }
     }
 
     private void goWelcomeWindow(MouseEvent event) throws IOException {
