@@ -1,24 +1,19 @@
 package main;
 
 import dao.factory.DaoFactory;
-import dao.impl.DaoImpl;
 import model.User;
-import service.factory.ServiceFactory;
 
 /**
  * @author Andrey Volinskiy on 17.02.2018.
  */
 public class Main {
 
+    private static User superUser = new User("superUser", "superUser", "superUser");
+    private static User general = new User("general", "general", "general");
+
 
     public static void main(String[] args) {
-        User general = new User();
-        general.setName("general");
-        general.setLogin("general");
-        general.setPassword("general");
 
-        System.out.println(ServiceFactory.getServiceMethods().checkRegistration(general));
-
+        System.out.println(DaoFactory.getDaoMethods().getAllMessages(superUser, general));
     }
-
 }

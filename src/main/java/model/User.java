@@ -3,6 +3,7 @@ package model;
 
 import lombok.*;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -16,10 +17,11 @@ import java.util.List;
 public class User {
     private int id;
     private String name;
-     String login;
+    private String login;
     private String password;
     private List<String> messagesTo;
     private List<String> messagesFrom;
+    private Date dateAndTime;
 
     public User(String login, String password) {
         this.login = login;

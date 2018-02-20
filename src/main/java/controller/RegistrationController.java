@@ -48,6 +48,8 @@ public class RegistrationController implements Initializable {
         btnBack.setOnMouseClicked(event -> {
             try {
                 goWelcomeWindow(event);
+                Stage stage = (Stage) btnBack.getScene().getWindow();
+                stage.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -61,7 +63,7 @@ public class RegistrationController implements Initializable {
         String passwordRe = txtPasswordRe.getText();
         User user = new User(name, login, password);
         if (password.equals(passwordRe)) {
-            ServiceFactory.getServiceMethods().registration(user);
+            ServiceFactory.getServiceMethods().createNewUser(user);
             txtTop.setText("Registration successful!");
         } else {
             txtTop.setText("Passwords don't match, re-enter");

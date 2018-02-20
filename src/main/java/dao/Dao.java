@@ -19,4 +19,5 @@ public interface Dao {
 
     void writeMessageToDB(String message, User userFrom, User userTo);
 
+    String getAllMessages(User userFrom, User userTo);
 }

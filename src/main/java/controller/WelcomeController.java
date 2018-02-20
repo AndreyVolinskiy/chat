@@ -45,16 +45,12 @@ public class WelcomeController implements Initializable {
             }
         });
         btnSign.setOnAction((ActionEvent event) -> {
-            try {
-                User incomingUser = new User(txtLogin.getText(), txtPassword.getText());
-                checkRegistration(incomingUser);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            User incomingUser = new User(txtLogin.getText(), txtPassword.getText());
+            checkRegistration(incomingUser);
         });
     }
 
-    private void checkRegistration(User user) throws IOException {
+    private void checkRegistration(User user) {
         System.out.println(user);
         try {
             if (ServiceFactory.getServiceMethods().checkRegistration(user)) {
@@ -65,14 +61,14 @@ public class WelcomeController implements Initializable {
                 Scene value = new Scene(parent);
                 stage.setScene(value);
                 stage.initModality(Modality.WINDOW_MODAL);
-                //            Window window = ((Node) event.getSource()).getScene().getWindow();
-                //            stage.initOwner(window);
                 stage.show();
+                txtLogin.clear();
+                txtPassword.clear();
             } else {
-                txtWelcome.setText("1User does not exist. Press register and go on.");
+                txtWelcome.setText("User does not exist. Press register and go on.");
             }
         } catch (NullPointerException e) {
-            txtWelcome.setText("2User does not exist. Press register and go on.");
+            txtWelcome.setText("User does not exist. Press register and go on.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,8 +82,6 @@ public class WelcomeController implements Initializable {
         Scene value = new Scene(parent);
         stage.setScene(value);
         stage.initModality(Modality.WINDOW_MODAL);
-//        Window window = ((Node) event.getSource()).getScene().getWindow();
-//        stage.initOwner(window);
         stage.show();
     }
 }

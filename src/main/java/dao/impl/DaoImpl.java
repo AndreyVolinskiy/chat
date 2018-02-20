@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * @author Andrey Volinskiy on 17.02.2018.
@@ -20,8 +21,8 @@ public class DaoImpl implements Dao {
     private final String GET_BY_LOGIN = "SELECT * FROM db_chat.users WHERE login = ?";
     private final String GET_ALL = "SELECT * FROM db_chat.users";
     private final String CREATE = "INSERT INTO users (`name`, `login`, `password`) VALUES (?,?,?)";
-    private final String CHECK = "";
-    private final String WRITE_MESSAGE = "";
+    private final String GET_ALL_MESSAGES = "SELECT * FROM messages WHERE user_id_from = ? AND user_id_to = ? ORDER BY time";
+    private final String WRITE_MESSAGE = "INSERT INTO messages (message, user_id_from, user_id_to, `time`) VALUES (?,?,?,NOW())";
 
     public User getUserById(int id) {
         User user = new User();
@@ -87,6 +88,31 @@ public class DaoImpl implements Dao {
     }
 
     public void writeMessageToDB(String message, User userFrom, User userTo) {
+        try (Connection connection = Database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(WRITE_MESSAGE)) {
+            statement.setString(1, message);
+            statement.setInt(2, userFrom.getId());
+            statement.setInt(3, userTo.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @Override
+    public String getAllMessages(User userFrom, User userTo) {
+        StringJoiner joiner = new StringJoiner("\n");
+        try (Connection connection = Database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_ALL_MESSAGES)) {
+            statement.setInt(1, userFrom.getId());
+            statement.setInt(2, userTo.getId());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                joiner.add(resultSet.getString("message"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return joiner.toString();
     }
 }
